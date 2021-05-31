@@ -1,0 +1,5 @@
+yasho,kjasnk,138392,Yavor,samdk,asdas,12 12 2000,3123,sadasd sadd
+nzxsad,ansnd,4567,ashbd,jkasb,ansdn,12 2 2000,463782,asn asdji ad
+aaa,xxx,123,A,B,C,1 2 2000,3456,asd fgh
+bbb,zzz,123445,CCC,B,A,2 1 1999,1234213,asxc aeqr sfa
+qwe,zxc,1245678,v,v,v,12 1 1223,8765432,zxc asd qwe

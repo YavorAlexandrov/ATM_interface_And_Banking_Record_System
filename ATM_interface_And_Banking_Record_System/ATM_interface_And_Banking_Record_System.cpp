@@ -1,11 +1,23 @@
 #include <iostream>
-#include"Name.h"
+#include<string>
+#include"Admin.h"
+#include"Database.h"
 
-//using namespace std;
+
 
 int main()
-{
+{ 
+     Database db;
+     
+     Name n("asd", "asdf ", " asfafa");
+     Date d(2,11,2000);
+     
+     Admin a("a", "b", "c", n, d, "d", "e");
+     
+     db.addAdmin(a);
     
+     db.addEmployee(0);
+
     
     
 }
