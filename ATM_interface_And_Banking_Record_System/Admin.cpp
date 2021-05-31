@@ -9,7 +9,7 @@ Admin::Admin(const std::string& username, const std::string& password, const std
 }
 
 void Admin::createEmployeeAcc(std::string& username,  std::string& password,  std::string& EGN,
-	 Name& fullName,  Date& date,  std::string& phoneNum, std::string& address) {
+	 Name& fullName,  Date& date,  std::string& phoneNum, std::string& address, std::vector<Employee*> &employees, bool& isGood) {
 	
 	cout << "$ Input username:" << std::endl << "> ";
 	cin >> username;
@@ -21,7 +21,14 @@ void Admin::createEmployeeAcc(std::string& username,  std::string& password,  st
 	
 	cout << "$ Input EGN:" << endl << "> ";
 	cin >> EGN;
-	//validateEGN(EGN);
+	for (int i = 0; i < employees.size(); i++) {
+		if (EGN == employees[i]->getEGN()) {
+			cout << "[Employee with this EGN exists!]";
+			isGood = false;
+			return;
+		}
+	}
+	
 	
 	string firstName;
 	cout << "$ Input first name:" << endl << "> ";
@@ -67,7 +74,7 @@ void Admin::createEmployeeAcc(std::string& username,  std::string& password,  st
 
 	fstream outFile("Employees.txt", ios::app);
 	outFile << username << "," << password << "," << EGN << "," << firstName << "," << middleName << "," << lastName << "," << date.getDay()<<" "<<date.getMonth()<<" "<< date.getYear() << "," << phoneNum << "," << address << endl;
-	
+	isGood = true;
 }
 void Admin::deleteEmployeeAcc(const std::string EGN) {
 

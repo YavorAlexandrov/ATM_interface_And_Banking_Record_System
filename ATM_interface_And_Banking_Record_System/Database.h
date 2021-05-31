@@ -8,11 +8,13 @@ class Database
 {
 	std::vector <Admin*> admins;
 	std::vector<Employee*> employees;
-	//std::vector<Client> clients;
+	//std::vector<Client*> clients;
 
 
 	std::string convertToString(char* a, int size);
 	void copyNextWord(char* dest, char* source);
+	void load(const char* fileName, int sw);
+	int countLines(const char* fileName);
 public:
 	void addEmployee(int adminID);
 
@@ -24,6 +26,8 @@ public:
 
 	void loadUsersFromFiles();
 	void printEmployees();
+
+	~Database();
 
 
 };
