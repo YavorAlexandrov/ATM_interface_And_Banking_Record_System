@@ -3,7 +3,7 @@
 class Employee :
     public Person
 {
-    void printPerson() override;
+    
 
 public:
     Employee();
@@ -11,7 +11,7 @@ public:
         const Name& fullName, const Date& date, const std::string& phoneNum,
         const std::string& address);
 
-
+    void printPerson() override;
 
 };
 

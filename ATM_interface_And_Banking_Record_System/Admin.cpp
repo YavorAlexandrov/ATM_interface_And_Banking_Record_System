@@ -76,39 +76,7 @@ void Admin::printPerson() {
 	std::cout << this->getUsername();
 }
 
-void Admin::breakDownDate(int& _day, int& _month, int& _year, string date) {
-	string day,month,year;
-	if (date[1] == ' ') {
-		day = date.substr(0, 1);
-		if (date[3] == ' ') {
-			month = date.substr(2, 1);
-			year = date.substr(4, 4);
-		}
-		else {
-			month = date.substr(2, 2);
-			year = date.substr(5, 4);
-		}
-	}
-	else {
-		day = date.substr(0, 2);
-		if (date[4] == ' ') {
-			month = date.substr(3, 1);
-			year = date.substr(5, 4);
-		}
-		else {
-			month = date.substr(3, 2);
-			year = date.substr(6, 4);
-		}
-	}
-	char arr1[2], arr2[2], arr3[4];
-	strcpy(arr1, day.c_str());
-	strcpy(arr2, month.c_str());
-	strcpy(arr3, year.c_str());
 
-	_day = atoi(arr1);
-	_month = atoi(arr2);
-	_year = atoi(arr3);
-}
 
 void Admin::copyNextWord(char* dest, char* source) {
 	int i = 0;

@@ -5,7 +5,6 @@
 class Admin: protected Person
 {
 
-	void breakDownDate(int& day, int& month, int& year, std::string date);
 	void copyNextWord(char* dest, char* source);
 public:
 

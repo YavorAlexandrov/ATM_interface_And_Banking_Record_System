@@ -1,4 +1,5 @@
 #include "Database.h"
+#include<fstream>
 
 void Database::addEmployee(int adminID) {
 	std::string username, password, EGN, phoneNum, address;
@@ -19,4 +20,121 @@ void Database::addClient(const std::string& username, const std::string& passwor
 void Database::addAdmin(const Admin& a) {
 	admins.push_back(new Admin(a));
 
+}
+
+void Database::loadUsersFromFiles() {
+	std::ifstream in("Employees.txt");
+	
+	while (in.good()) {
+		char usernameBuff[64] ;
+		in.get(usernameBuff, ',');
+		in.seekg(1, 1);
+		std::string username;
+		username = convertToString(usernameBuff, strlen(usernameBuff));
+		
+		char passwordBuff[64];
+		in.get(passwordBuff,64, ',');
+		in.seekg(1, 1);
+		std::string password;
+		password = convertToString(passwordBuff, strlen(passwordBuff));
+		
+		char EGNbuff[16];
+		in.get(EGNbuff, 16, ',');
+		in.seekg(1, 1);
+		std::string EGN;
+		EGN = convertToString(EGNbuff, strlen(EGNbuff));
+		
+		char firstNameBuff[64];
+		in.get(firstNameBuff, 64, ',');
+		in.seekg(1, 1);
+		std::string firstName;
+		firstName = convertToString(firstNameBuff, strlen(firstNameBuff));
+		
+		char middleNameBuff[64];
+		in.get(middleNameBuff, 64, ',');
+		in.seekg(1, 1);
+		std::string middleName;
+		middleName = convertToString(middleNameBuff, strlen(middleNameBuff));
+		
+		char lastNameBuff[64];
+		in.get(lastNameBuff, 64, ',');
+		in.seekg(1, 1);
+		std::string lastName;
+		lastName = convertToString(lastNameBuff, strlen(lastNameBuff));
+		
+		Name name(firstName, middleName, lastName);
+
+		char dateBuff[16];
+		in.get(dateBuff, 16, ',');
+		in.seekg(1, 1);
+		
+		int day, month, year;
+		
+		for (int i = 0; i < 3; i++) {
+			char arr[10000];
+			copyNextWord(arr, dateBuff);
+			switch (i) {
+			case 0: day = atoi(arr); break;
+			case 1: month = atoi(arr); break;
+			case 2: year = atoi(arr); break;
+			default: break;
+			}
+		}
+		Date date(day, month, year);
+		
+		char phoneBuff[64];
+		in.get(phoneBuff, 64, ',');
+		in.seekg(1, 1);
+		std::string phone;
+		phone = convertToString(phoneBuff, strlen(phoneBuff));
+		
+		char addressBuff[64];
+		in.get(addressBuff, 64, ',');
+		in.seekg(1, 1);
+		std::string address;
+		address = convertToString(addressBuff, strlen(addressBuff));
+
+		employees.push_back( new Employee(username, password, EGN, name, date, phone, address));
+		
+	}
+}
+
+std::string Database::convertToString(char* a, int size)
+{
+	int i;
+	std::string s = "";
+	for (i = 0; i < size; i++) {
+		s = s + a[i];
+	}
+	return s;
+}
+
+void Database::copyNextWord(char* dest, char* source) {
+	int i = 0;
+	while (source[i] != ' ') {
+		if (source[i] == '\0') {
+			break;
+		}
+		dest[i] = source[i];
+		i++;
+
+	}
+
+	dest[i] = '\0';
+	int j = strlen(source);
+	int k = 0;
+	i++;
+	while (i < j) {
+		source[k] = source[i];
+		i++;
+		k++;
+	}
+	source[k] = '\0';
+
+}
+
+void Database::printEmployees() {
+	for (int i = 0; i < employees.size(); i++) {
+		employees[i]->printPerson();
+	}
 }

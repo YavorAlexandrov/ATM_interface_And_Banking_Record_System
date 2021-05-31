@@ -20,7 +20,7 @@ public:
 	const std::string& getMiddleName();
 	const std::string& getLastName();
 
-	void printName();
+	void printName() const;
 
 };
 

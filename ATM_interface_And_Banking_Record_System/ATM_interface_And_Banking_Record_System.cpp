@@ -15,6 +15,7 @@ int main()
      Admin a("a", "b", "c", n, d, "d", "e");
      
      db.addAdmin(a);
+     db.loadUsersFromFiles();
     
      db.addEmployee(0);
 

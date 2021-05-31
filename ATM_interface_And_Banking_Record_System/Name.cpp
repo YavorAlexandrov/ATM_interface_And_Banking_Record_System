@@ -31,6 +31,6 @@ const std::string& Name::getLastName() {
 	return this->lastName;
 }
 
-void Name::printName() {
+void Name::printName() const{
 	std::cout << firstName << " " << middleName << " " << lastName;
 }

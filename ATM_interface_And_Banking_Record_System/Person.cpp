@@ -86,7 +86,7 @@ const std::string& Person::getEGN()
 }
 
 
-const Name& Person::getName()
+const Name& Person::getName() 
 {
 	return this->fullName;
 }

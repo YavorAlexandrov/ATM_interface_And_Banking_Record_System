@@ -10,6 +10,9 @@ class Database
 	std::vector<Employee*> employees;
 	//std::vector<Client> clients;
 
+
+	std::string convertToString(char* a, int size);
+	void copyNextWord(char* dest, char* source);
 public:
 	void addEmployee(int adminID);
 
@@ -20,6 +23,7 @@ public:
 	void addAdmin(const Admin& a);
 
 	void loadUsersFromFiles();
+	void printEmployees();
 
 
 };

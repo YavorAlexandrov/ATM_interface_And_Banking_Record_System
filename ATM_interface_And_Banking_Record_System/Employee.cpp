@@ -9,5 +9,9 @@ Employee::Employee(const std::string& username, const std::string& password, con
 }
 
 void Employee::printPerson() {
-	
+	std::cout << this->getUsername() << " " << this->getPassword() << " " << this->getEGN() << " " <<
+		this->getPhone() << " " << this->getAddress()<<" ";
+	getName().printName();
+	std::cout << " ";
+	std::cout << getDate().getDay() << "-" << getDate().getMonth() << "-" << getDate().getYear() << '\n';
 }
