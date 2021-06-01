@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="Admin.cpp" />
     <ClCompile Include="ATM_interface_And_Banking_Record_System.cpp" />
+    <ClCompile Include="BankAccount.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Database.cpp" />
     <ClCompile Include="Date.cpp" />
@@ -150,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Admin.h" />
+    <ClInclude Include="BankAccount.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="Database.h" />
     <ClInclude Include="Date.h" />

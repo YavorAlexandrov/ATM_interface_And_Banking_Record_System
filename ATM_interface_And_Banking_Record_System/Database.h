@@ -15,8 +15,10 @@ class Database
 	void copyNextWord(char* dest, char* source);
 	void load(const char* fileName, int sw);
 	int countLines(const char* fileName);
+	void writeAccsToFile(const char* fileName, int sw);
 public:
 	void addEmployee(int adminID);
+	void deleteEmployee(int adminID);
 
 	void addClient(const std::string& username, const std::string& password, const std::string& EGN,
 				   const Name& fullName, const Date& date, const std::string& phoneNum,

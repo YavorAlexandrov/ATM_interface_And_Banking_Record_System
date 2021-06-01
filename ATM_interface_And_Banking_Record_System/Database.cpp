@@ -9,8 +9,22 @@ void Database::addEmployee(int adminID) {
 	admins[adminID]->createEmployeeAcc(username, password, EGN, fullName, date, phoneNum, address, employees, isGood);
 	if (isGood) {
 		employees.push_back(new Employee(username, password, EGN, fullName, date, phoneNum, address));
-		std::cout << "[ Employee account successfully created! ]";
+		system("cls");
+		std::cout << "[ Employee account successfully created! ]"<<'\n';
 	}
+
+}
+
+void Database::deleteEmployee(int adminID) {
+	std::string EGN;
+	bool isGood;
+	admins[adminID]->deleteEmployeeAcc(EGN, employees, isGood);
+	if (isGood) {
+		writeAccsToFile("Employees.txt", 2);
+		system("cls");
+		std::cout << "[ Employee account successfully deleted! ]"<<'\n';
+	}
+
 
 }
 
@@ -156,6 +170,7 @@ void Database::load(const char* fileName, int sw) {
 		
 
 	}
+	in.close();
 }
 
 int Database::countLines(const char* fileName)
@@ -187,4 +202,48 @@ Database::~Database() {
 	/*for (int i = 0; i < clients.size(); i++) {
 		delete clients[i];
 	}*/
+}
+
+void Database::writeAccsToFile(const char* fileName, int sw) {
+	if (sw == 1) {
+		
+		std::ofstream f(fileName, std::ios::trunc);
+		int size = admins.size();
+		for (int i = 0; i < size; i++) {
+			f << admins[i]->getUsername() << "," << admins[i]->getPassword() << "," 
+				<< admins[i]->getEGN() << "," << admins[i]->getName().getFirstName() << "," << admins[i]->getName().getMiddleName() 
+				<< "," << admins[i]->getName().getLastName() << "," << admins[i]->getDate().getDay() << " " << admins[i]->getDate().getMonth() << " " << admins[i]->getDate().getYear()  << "," << admins[i]->getPhone() 
+				<< "," << admins[i]->getAddress() << '\n';
+
+		}
+		f.close();
+	}
+	else if (sw == 2) {
+		
+		std::ofstream f(fileName, std::ios::trunc);
+		int size = employees.size();
+		for (int i = 0; i < size; i++) {
+			f << employees[i]->getUsername() << "," << employees[i]->getPassword() << ","
+				<< employees[i]->getEGN() << "," << employees[i]->getName().getFirstName() << "," << employees[i]->getName().getMiddleName()
+				<< "," << employees[i]->getName().getLastName() << "," << employees[i]->getDate().getDay() << " " << employees[i]->getDate().getMonth() << " " 
+				<< employees[i]->getDate().getYear() << "," << employees[i]->getPhone() << "," << employees[i]->getAddress() << '\n';
+
+		}
+		f.close();
+	}
+	else {
+		/*
+		
+		std::ofstream f(fileName, std::ios::trunc);
+		int size = clients.size();
+		for (int i = 0; i < size; i++) {
+			f << clients[i]->getUsername() << "," << clients[i]->getPassword() << ","
+				<< clients[i]->getEGN() << "," << clients[i]->getName().getFirstName() << "," << clients[i]->getName().getMiddleName()
+				<< "," << clients[i]->getName().getLastName() << "," << clients[i]->getDate().getDay() << " " << clients[i]->getDate().getMonth() << " "
+				<< clients[i]->getDate().getYear() << "," << clients[i]->getPhone() << "," << clients[i]->getAddress() << '\n';
+
+		}
+		f.close();*/
+	}
+
 }

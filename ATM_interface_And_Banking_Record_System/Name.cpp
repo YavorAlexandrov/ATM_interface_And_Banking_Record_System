@@ -21,13 +21,13 @@ void Name::setLastName(const std::string& lName) {
 	this->lastName = lName;
 }
 
-const std::string& Name::getFirstName() {
+const std::string& Name::getFirstName() const{
 	return this->firstName;
 }
-const std::string& Name::getMiddleName() {
+const std::string& Name::getMiddleName() const{
 	return this->middleName;
 }
-const std::string& Name::getLastName() {
+const std::string& Name::getLastName() const{
 	return this->lastName;
 }
 

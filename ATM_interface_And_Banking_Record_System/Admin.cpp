@@ -76,8 +76,18 @@ void Admin::createEmployeeAcc(std::string& username,  std::string& password,  st
 	outFile << username << "," << password << "," << EGN << "," << firstName << "," << middleName << "," << lastName << "," << date.getDay()<<" "<<date.getMonth()<<" "<< date.getYear() << "," << phoneNum << "," << address << endl;
 	isGood = true;
 }
-void Admin::deleteEmployeeAcc(const std::string EGN) {
-
+void Admin::deleteEmployeeAcc(std::string& EGN, std::vector<Employee*>& employees, bool& isGood) {
+	cout << "$ Input EGN:" << endl << "> ";
+	cin >> EGN;
+	for (int i = 0; i < employees.size(); i++) {
+		if (EGN == employees[i]->getEGN()) {
+			employees.erase(employees.begin()+i);
+			isGood = true;
+			return;
+		}
+	}
+	isGood = false;
+	cout << "[ Employee with this EGN does not exist! ]";
 }
 void Admin::printPerson() {
 	std::cout << this->getUsername();

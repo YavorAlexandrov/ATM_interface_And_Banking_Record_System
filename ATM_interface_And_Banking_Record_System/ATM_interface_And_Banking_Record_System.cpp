@@ -18,11 +18,24 @@ int main()
         //db.addAdmin(a);
         db.loadUsersFromFiles();
     
-    // db.printEmployees();
-    
-     db.addEmployee(0);
 
+        //db.deleteEmployee(0);
+      //db.printEmployees();
     
+       // db.addEmployee(0);
+
+
+  
+        while (1) {
+            int a;
+            std::cin >> a;
+            if (a == 1) {
+                db.addEmployee(0);
+            }
+            else if (a == 2) {
+                db.deleteEmployee(0);
+            }
+    }
     
 }
 

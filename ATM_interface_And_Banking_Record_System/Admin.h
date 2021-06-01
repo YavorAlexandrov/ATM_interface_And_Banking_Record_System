@@ -4,7 +4,7 @@
 #include<fstream>
 #include<vector>
 
-class Admin: protected Person
+class Admin: public Person
 {
 
 	void copyNextWord(char* dest, char* source);
@@ -15,7 +15,7 @@ public:
 
 	void createEmployeeAcc(std::string& username, std::string& password, std::string& EGN,
 		 Name& fullName, Date& date, std::string& phoneNum, std::string& address, std::vector<Employee*> &employees, bool& isGood);
-	void deleteEmployeeAcc(const std::string EGN);
+	void deleteEmployeeAcc(std::string& EGN, std::vector<Employee*>& employees, bool& isGood);
 
 	void printPerson() override;
 };

@@ -15,3 +15,8 @@ void Employee::printPerson() {
 	std::cout << getDate().getDay() << "-" << getDate().getMonth() << "-" << getDate().getYear() << " ";
 	std::cout<< this->getPhone() << " " << this->getAddress()<<"\n";
 }
+
+void Employee::createClientAcc(std::string& username, std::string& password, std::string& EGN,
+	Name& fullName, Date& date, std::string& phoneNum, std::string& address, std::vector<Employee*>& clients, bool& isGood) {
+
+}

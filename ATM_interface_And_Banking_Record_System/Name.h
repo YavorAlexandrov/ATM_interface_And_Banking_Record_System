@@ -16,9 +16,9 @@ public:
 	void setMiddleName(const std::string& mName);
 	void setLastName(const std::string& lName);
 
-	const std::string& getFirstName();
-	const std::string& getMiddleName();
-	const std::string& getLastName();
+	const std::string& getFirstName() const;
+	const std::string& getMiddleName() const;
+	const std::string& getLastName() const;
 
 	void printName() const;
 
