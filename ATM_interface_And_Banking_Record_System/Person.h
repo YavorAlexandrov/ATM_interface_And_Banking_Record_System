@@ -4,8 +4,7 @@
 #include"Date.h"
 class Person
 {
-	std::string username;
-	std::string password;
+
 	std::string EGN;
 	Name fullName;
 	Date date;
@@ -14,12 +13,10 @@ class Person
 
 public:
 	Person();
-	Person(const std::string& username, const std::string& password, const std::string& EGN, const Name& fullName, const Date& date, const std::string& phoneNum, const std::string& address);
+	Person(const std::string& EGN, const Name& fullName, const Date& date, const std::string& phoneNum, const std::string& address);
 	virtual ~Person();
 
 
-	void setUsername(const std::string& username);
-	void setPassword(const std::string password);
 	void setEGN(const std::string EGN);
 	void setName(const Name& name);
 	void setDate(const Date& date);

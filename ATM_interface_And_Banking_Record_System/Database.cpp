@@ -28,10 +28,17 @@ void Database::deleteEmployee(int adminID) {
 
 }
 
-void Database::addClient(const std::string& username, const std::string& password, const std::string& EGN,
-	const Name& fullName, const Date& date, const std::string& phoneNum,
-	const std::string& address) {
-
+void Database::addClient(int employeeID) {
+	std::string EGN, phoneNum, address;
+	Name fullName;
+	Date date;
+	bool isGood;
+	employees[employeeID]->createClientAcc(EGN, fullName, date, phoneNum, address, clients, isGood);
+	if (isGood) {
+		clients.push_back(new Client(EGN, fullName, date, phoneNum, address));
+		system("cls");
+		std::cout << "[ Client account successfully created! ]" << '\n';
+	}
 
 }
 
@@ -43,7 +50,7 @@ void Database::addAdmin(const Admin& a) {
 void Database::loadUsersFromFiles() {
 	load("Employees.txt", 2);
 	load("Admins.txt", 1);
-	//load("Clients.txt",3);
+	load("Clients.txt",3);
 }
 
 std::string Database::convertToString(char* a, int size)
@@ -90,18 +97,21 @@ void Database::load(const char* fileName, int sw) {
 	std::ifstream in(fileName);
 	int count = countLines(fileName);
 	for(int i=0;i<count-1;i++) {
-		char usernameBuff[64];
-		in.get(usernameBuff, 64, ',');
-		in.seekg(1, 1);
 		std::string username;
-		username = convertToString(usernameBuff, strlen(usernameBuff));
-
-		char passwordBuff[64];
-		in.get(passwordBuff, 64, ',');
-		in.seekg(1, 1);
 		std::string password;
-		password = convertToString(passwordBuff, strlen(passwordBuff));
+		if (sw == 1 || sw == 2) {
+			char usernameBuff[64];
+			in.get(usernameBuff, 64, ',');
+			in.seekg(1, 1);
+			
+			username = convertToString(usernameBuff, strlen(usernameBuff));
 
+			char passwordBuff[64];
+			in.get(passwordBuff, 64, ',');
+			in.seekg(1, 1);
+			
+			password = convertToString(passwordBuff, strlen(passwordBuff));
+		}
 		char EGNbuff[16];
 		in.get(EGNbuff, 16, ',');
 		in.seekg(1, 1);
@@ -163,7 +173,7 @@ void Database::load(const char* fileName, int sw) {
 		{
 		case 1: admins.push_back(new Admin(username, password, EGN, name, date, phone, address)); break;
 		case 2: employees.push_back(new Employee(username, password, EGN, name, date, phone, address)); break;
-		case 3: //clients.push_back(new Cient(username, password, EGN, name, date, phone, address)); break;
+		case 3: clients.push_back(new Client(EGN, name, date, phone, address)); break;
 		default:
 			break;
 		}
@@ -199,9 +209,9 @@ Database::~Database() {
 	for (int i = 0; i < employees.size(); i++) {
 		delete employees[i];
 	}
-	/*for (int i = 0; i < clients.size(); i++) {
+	for (int i = 0; i < clients.size(); i++) {
 		delete clients[i];
-	}*/
+	}
 }
 
 void Database::writeAccsToFile(const char* fileName, int sw) {
@@ -232,18 +242,43 @@ void Database::writeAccsToFile(const char* fileName, int sw) {
 		f.close();
 	}
 	else {
-		/*
+		
 		
 		std::ofstream f(fileName, std::ios::trunc);
 		int size = clients.size();
 		for (int i = 0; i < size; i++) {
-			f << clients[i]->getUsername() << "," << clients[i]->getPassword() << ","
-				<< clients[i]->getEGN() << "," << clients[i]->getName().getFirstName() << "," << clients[i]->getName().getMiddleName()
+			f << clients[i]->getEGN() << "," << clients[i]->getName().getFirstName() << "," << clients[i]->getName().getMiddleName()
 				<< "," << clients[i]->getName().getLastName() << "," << clients[i]->getDate().getDay() << " " << clients[i]->getDate().getMonth() << " "
 				<< clients[i]->getDate().getYear() << "," << clients[i]->getPhone() << "," << clients[i]->getAddress() << '\n';
 
 		}
-		f.close();*/
+		f.close();
 	}
 
+}
+
+void Database::loadClientBankAccs() {
+	int size = clients.size();
+
+	for (int i = 0; i < size; i++) {
+		std::string fileName = "BankAccounts/" + clients[i]->getEGN() + ".txt";
+		std::ifstream f(fileName);
+		int count = countLines(fileName.c_str());
+		for (int j = 0; j < count-1; j++) {
+			char BAnumBuff[32];
+			f.get(BAnumBuff, 32, ',');
+			f.seekg(1, 1);
+			std::string BAnum;
+			BAnum = convertToString(BAnumBuff, strlen(BAnumBuff));
+
+			char amountBuff[16];
+			f.get(amountBuff, 16, '\n');
+			f.seekg(2, 1);
+			int amount = atoi(amountBuff);
+			clients[i]->getBankAccs().push_back(new BankAccount(BAnum, amount));
+
+		}
+		
+
+	}
 }

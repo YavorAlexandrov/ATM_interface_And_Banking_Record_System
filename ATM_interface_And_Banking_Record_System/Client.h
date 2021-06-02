@@ -11,7 +11,7 @@ class Client :
 
 public:
     Client();
-    Client(const std::string& username, const std::string& password, const std::string& EGN,
+    Client(const std::string& EGN,
         const Name& fullName, const Date& date, const std::string& phoneNum,
         const std::string& address);
 
@@ -23,6 +23,9 @@ public:
     void withdraw(int amount);
     void checkBalance();
 
+    int getBAsize();
+
+    std::vector<BankAccount*>& getBankAccs();
 
 
 

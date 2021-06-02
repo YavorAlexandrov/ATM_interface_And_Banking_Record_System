@@ -13,29 +13,15 @@ int main()
         Name n("asd", "asdf ", " asfafa");
         Date d(2, 11, 2000);
 
-        Admin a("a", "b", "c", n, d, "d", "e");
 
-        //db.addAdmin(a);
+    
         db.loadUsersFromFiles();
-    
-
-        //db.deleteEmployee(0);
-      //db.printEmployees();
-    
-       // db.addEmployee(0);
-
-
-  
-        while (1) {
-            int a;
-            std::cin >> a;
-            if (a == 1) {
-                db.addEmployee(0);
-            }
-            else if (a == 2) {
-                db.deleteEmployee(0);
-            }
-    }
+        db.loadClientBankAccs();
+        bool b;
+        Employee e("asd", "dacx", "36782", n, d, "567", "ansdk asd");
+       
+        e.createBankAcc("6543", 3241, db.clients, b);
+        //db.addClient(0);
     
 }
 

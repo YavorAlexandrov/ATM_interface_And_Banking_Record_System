@@ -4,8 +4,31 @@ using namespace std;
 Admin::Admin() : Person() {
 
 }
-Admin::Admin(const std::string& username, const std::string& password, const std::string& EGN, const Name& fullName, const Date& date, const std::string& phoneNum, const std::string& address): Person(username, password, EGN, fullName, date, phoneNum, address) {
+Admin::Admin(const std::string& username, const std::string& password, const std::string& EGN, const Name& fullName, const Date& date, const std::string& phoneNum, const std::string& address): Person(EGN, fullName, date, phoneNum, address) {
+	setUsername(username);
+	setPassword(password);
+}
 
+void Admin::setUsername(const std::string& username)
+{
+	this->username = username;
+}
+
+
+void Admin::setPassword(const std::string password)
+{
+	this->password = password;
+}
+
+const std::string& Admin::getUsername()
+{
+	return this->username;
+}
+
+
+const std::string& Admin::getPassword()
+{
+	return this->password;
 }
 
 void Admin::createEmployeeAcc(std::string& username,  std::string& password,  std::string& EGN,

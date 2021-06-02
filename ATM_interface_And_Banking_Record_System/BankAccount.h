@@ -7,6 +7,15 @@ class BankAccount
 	std::vector<std::string> cards;
 	int currentAmount;
 
+public:
+	BankAccount();
+	BankAccount(const std::string& num, int amount);
+
+	void setNum(const std::string& num);
+	void setAmount(int amount);
+	void addCard(std::string& cardNum);
+
+	const std::string getNum() const;
 
 };
 
