@@ -145,6 +145,7 @@
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Database.cpp" />
     <ClCompile Include="Date.cpp" />
+    <ClCompile Include="DebitCard.cpp" />
     <ClCompile Include="Employee.cpp" />
     <ClCompile Include="Name.cpp" />
     <ClCompile Include="Person.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Client.h" />
     <ClInclude Include="Database.h" />
     <ClInclude Include="Date.h" />
+    <ClInclude Include="DebitCard.h" />
     <ClInclude Include="Employee.h" />
     <ClInclude Include="Name.h" />
     <ClInclude Include="Person.h" />

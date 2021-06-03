@@ -144,8 +144,56 @@ void Employee::createBankAcc(const std::string& EGN, int amount, std::vector<Cli
 			std::ofstream f(fileName, std::ios::app);
 
 			f << BAnum << ","<<amount<<'\n';
-
+			f.close();
 			return;
+		}
+	}
+}
+
+void Employee::deleteClientAcc(std::string& EGN, std::vector<Client*>& clients, bool& isGood) {
+	std::cout << "$ Input EGN:" << std::endl << "> ";
+	std::cin >> EGN;
+	int size = clients.size();
+	for (int i = 0; i < size; i++) {
+		if (EGN == clients[i]->getEGN()) {
+			int BAsize = clients[i]->getBankAccs().size();
+			for (int j = 0; j < BAsize; j++) {
+				//remove files with cards and bankAccs
+			}
+			clients.erase(clients.begin() + i);
+			isGood = true;
+			return;
+		}
+	}
+	isGood = false;
+	std::cout << "[ Client with this EGN does not exist! ]";
+}
+
+void Employee::addNewCard(const std::string& EGN,const std::string& BAnum, std::vector<Client*>& clients, bool& isGood) {
+	int size = clients.size();
+	for (int i = 0; i < size; i++) {
+		if (EGN == clients[i]->getEGN()) {
+			int BAsize = clients[i]->getBankAccs().size();
+			for (int j = 0; j < BAsize; j++) {
+				if (BAnum == clients[i]->getBankAccs()[j]->getNum()) {
+					int cardsSize = clients[i]->getBankAccs()[j]->getCards().size() + 1;
+					char buff[3];
+					itoa(cardsSize, buff, 10);
+					std::string num = std::string(buff);
+					std::string last4Digitis = EGN.substr(EGN.size() - 4, 4);
+					std::string CardNum = "00" + last4Digitis + num;
+
+					clients[i]->getBankAccs()[j]->addCard(CardNum);
+					std::string fileName = "BankAccounts/Cards/" + clients[i]->getBankAccs()[j]->getNum() + ".txt";
+					std::ofstream f(fileName, std::ios::app);
+					int pos = clients[i]->getBankAccs()[j]->getCards().size() - 1;
+					f << CardNum << "," << clients[i]->getBankAccs()[j]->getCards()[pos]->getPIN() << '\n';
+					f.close();
+					return;
+
+
+				}
+			}
 		}
 	}
 }

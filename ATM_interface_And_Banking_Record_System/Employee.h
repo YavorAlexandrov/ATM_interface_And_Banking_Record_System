@@ -27,11 +27,11 @@ public:
     void createClientAcc(std::string& EGN, Name& fullName, Date& date, std::string& phoneNum, 
                         std::string& address, std::vector<Client*>& clients, bool& isGood);
 
-    void deleteClientAcc(std::string& EGN, std::vector<Employee*>& client, bool& isGood);
+    void deleteClientAcc(std::string& EGN, std::vector<Client*>& client, bool& isGood);
 
     void createBankAcc(const std::string& EGN, int amount, std::vector<Client*>& clients, bool& isGood);// 00MYBANK<last 4 digits of EGN><bankAccsAmount>
 
-    void addNewCard(std::string& EGN, std::string& BAnum);//00<last 4 digits of EGN><cardsAmount>
+    void addNewCard(const std::string& EGN, const std::string& BAnum, std::vector<Client*>& clients, bool& isGood);//00<last 4 digits of EGN><cardsAmount>
 
     void deleteBankAcc(std::string& EGN, std::string& BAnum); //check EGN, check BAnum
 

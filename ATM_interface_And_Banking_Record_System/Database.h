@@ -20,7 +20,9 @@ public:
 	void deleteEmployee(int adminID);
 
 	void addClient(int employeeID);
+	void deleteClient(int employeeID);
 	void loadClientBankAccs();
+	void loadClientCards();
 
 	void addAdmin(const Admin& a);
 

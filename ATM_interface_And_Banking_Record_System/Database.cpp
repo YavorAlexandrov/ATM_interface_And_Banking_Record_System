@@ -278,7 +278,48 @@ void Database::loadClientBankAccs() {
 			clients[i]->getBankAccs().push_back(new BankAccount(BAnum, amount));
 
 		}
-		
+		f.close();
 
+	}
+}
+
+void Database::loadClientCards() {
+	int size = clients.size();
+
+	for (int i = 0; i < size; i++) {
+		int BAsize = clients[i]->getBankAccs().size();
+
+		for (int j = 0; j < BAsize; j++) {
+			std::string fileName = "BankAccounts/Cards/" + clients[i]->getBankAccs()[j]->getNum() + ".txt";
+			std::ifstream f(fileName);
+			int count = countLines(fileName.c_str());
+
+			for (int k = 0; k < count - 1; k++) {
+				char CnumBuff[32];
+				f.get(CnumBuff, 32, ',');
+				f.seekg(1, 1);
+				std::string Cnum;
+				Cnum = convertToString(CnumBuff, strlen(CnumBuff));
+
+				char PINBuff[16];
+				f.get(PINBuff, 16, '\n');
+				f.seekg(2, 1);
+				int PIN = atoi(PINBuff);
+				clients[i]->getBankAccs()[j]->getCards().push_back(new DebitCard(Cnum, PIN));
+			}
+			f.close();
+		}
+	}
+}
+
+void Database::deleteClient(int employeeID) {
+	std::string EGN;
+	bool isGood;
+	
+	employees[employeeID]->deleteClientAcc(EGN, clients, isGood);
+	if (isGood) {
+		writeAccsToFile("Clients.txt", 3);
+		system("cls");
+		std::cout << "[ Client account successfully deleted! ]" << '\n';
 	}
 }

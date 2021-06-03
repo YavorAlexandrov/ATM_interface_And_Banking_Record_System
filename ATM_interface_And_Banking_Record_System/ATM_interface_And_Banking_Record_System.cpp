@@ -17,10 +17,11 @@ int main()
     
         db.loadUsersFromFiles();
         db.loadClientBankAccs();
+        db.loadClientCards();
         bool b;
         Employee e("asd", "dacx", "36782", n, d, "567", "ansdk asd");
        
-        e.createBankAcc("6543", 3241, db.clients, b);
+        e.addNewCard("6543", "00MYBANK65432", db.clients, b);
         //db.addClient(0);
     
 }

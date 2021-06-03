@@ -18,9 +18,14 @@ void BankAccount::setAmount(int amount) {
 	this->currentAmount = amount;
 }
 void BankAccount::addCard(std::string& cardNum) {
-	cards.push_back(cardNum);
+	
+	cards.push_back(new DebitCard(cardNum));
 }
 
-const std::string BankAccount::getNum() const{
+const std::string& BankAccount::getNum() const{
 	return this->num;
+}
+
+std::vector<DebitCard*>& BankAccount::getCards() {
+	return cards;
 }
