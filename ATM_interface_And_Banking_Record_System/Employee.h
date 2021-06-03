@@ -29,17 +29,17 @@ public:
 
     void deleteClientAcc(std::string& EGN, std::vector<Client*>& client, bool& isGood);
 
-    void createBankAcc(const std::string& EGN, int amount, std::vector<Client*>& clients, bool& isGood);// 00MYBANK<last 4 digits of EGN><bankAccsAmount>
+    void createBankAcc(const std::string& EGN, double amount, std::vector<Client*>& clients, bool& isGood);// 00MYBANK<last 4 digits of EGN><bankAccsAmount>
 
     void addNewCard(const std::string& EGN, const std::string& BAnum, std::vector<Client*>& clients, bool& isGood);//00<last 4 digits of EGN><cardsAmount>
 
-    void deleteBankAcc(std::string& EGN, std::string& BAnum); //check EGN, check BAnum
+    void deleteBankAcc(std::vector<Client*>& clients); //check EGN, check BAnum
 
-    void deleteCard(std::string& EGN, std::string& BAnum, std::string& cardNum); //check EGN, check BAnum, check cardNum
+    void deleteCard(std::vector<Client*>& clients); //check EGN, check BAnum, check cardNum
 
-    void printClients();
+    void printClients(std::vector<Client*>& clients);
 
-    void printClient(std::string& EGN);
+    void printClient(const std::string& EGN, std::vector<Client*>& clients);
 
 };
 

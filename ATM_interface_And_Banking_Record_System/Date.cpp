@@ -1,4 +1,5 @@
 #include "Date.h"
+#include<iostream>
 
 Date::Date() {
 	Date(1, 1, 1900);
@@ -60,4 +61,8 @@ bool Date::validateDate(int day, int month, int year) {
 		return false;
 	}
 	return true;
+}
+
+void Date::printDate() const{
+	std::cout << day << " " << month << " " << year<<'\n';
 }

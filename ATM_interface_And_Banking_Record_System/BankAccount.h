@@ -6,17 +6,20 @@ class BankAccount
 {
 	std::string num;
 	std::vector<DebitCard*> cards;
-	int currentAmount;
+	double currentAmount;
 
 public:
 	BankAccount();
-	BankAccount(const std::string& num, int amount);
+	BankAccount(const std::string& num, double amount);
 
 	void setNum(const std::string& num);
-	void setAmount(int amount);
+	void setAmount(double amount);
 	void addCard(std::string& cardNum);
 
 	const std::string& getNum() const;
+	double getAmount();
 	std::vector<DebitCard*>& getCards();
+
+	~BankAccount();
 };
 
