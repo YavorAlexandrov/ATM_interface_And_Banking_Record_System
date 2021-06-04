@@ -13,8 +13,10 @@ void BankAccount::setNum(const std::string& num) {
 	this->num = num;
 }
 void BankAccount::setAmount(double amount) {
-	if (amount < 0)
+	if (amount < 0) {
+		
 		amount = 0;
+	}
 	this->currentAmount = amount;
 }
 void BankAccount::addCard(std::string& cardNum) {

@@ -24,3 +24,28 @@ int Client::getBAsize() {
 std::vector<BankAccount*>& Client::getBankAccs() {
 	return bankAccounts;
 }
+
+void Client::deposit(int funds, int BAnum) {
+	if (funds < 0) {
+		std::cout << "$ Invalid amount!";
+		return;
+	}
+	bankAccounts[BAnum]->setAmount(bankAccounts[BAnum]->getAmount() + funds);
+
+	std::cout << "$ Deposit successfull!";
+}
+void Client::withdraw(int amount, int BAnum) {
+	if (amount < 0) {
+		std::cout << "$ Invalid amount!\n";
+		return;
+	}
+	if (bankAccounts[BAnum]->getAmount() - amount < 0) {
+		std::cout << "Insufficient funds!\n";
+		return;
+	}
+	bankAccounts[BAnum]->setAmount(bankAccounts[BAnum]->getAmount() - amount);
+	std::cout << "$ Withdrawal successfull!";
+}
+void Client::checkBalance(int BAnum) {
+	std::cout << "$ Current balance is: " << bankAccounts[BAnum]->getAmount() << '\n';
+}

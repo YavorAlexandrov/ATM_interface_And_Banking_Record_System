@@ -2,7 +2,7 @@
 #include"Client.h"
 #include<fstream>
 #include<vector>
-#include<fstream>
+
 class Employee :
     public Person
 {
@@ -29,9 +29,9 @@ public:
 
     void deleteClientAcc(std::string& EGN, std::vector<Client*>& client, bool& isGood);
 
-    void createBankAcc(const std::string& EGN, double amount, std::vector<Client*>& clients, bool& isGood);// 00MYBANK<last 4 digits of EGN><bankAccsAmount>
+    void createBankAcc(const std::string& EGN, double amount, std::vector<Client*>& clients);// 00MYBANK<last 4 digits of EGN><bankAccsAmount>
 
-    void addNewCard(const std::string& EGN, const std::string& BAnum, std::vector<Client*>& clients, bool& isGood);//00<last 4 digits of EGN><cardsAmount>
+    void addNewCard(const std::string& EGN, const std::string& BAnum, std::vector<Client*>& clients);//00<last 4 digits of EGN><cardsAmount>
 
     void deleteBankAcc(std::vector<Client*>& clients); //check EGN, check BAnum
 

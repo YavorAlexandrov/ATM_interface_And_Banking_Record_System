@@ -29,10 +29,6 @@ public:
 	void loadUsersFromFiles();
 	void printEmployees();
 
-	
-
-	
-
 	~Database();
 
 

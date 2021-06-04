@@ -12,6 +12,10 @@ public:
 	BankAccount();
 	BankAccount(const std::string& num, double amount);
 
+	BankAccount(const BankAccount& other) = delete;
+	BankAccount& operator = (const BankAccount& other) = delete;
+
+
 	void setNum(const std::string& num);
 	void setAmount(double amount);
 	void addCard(std::string& cardNum);

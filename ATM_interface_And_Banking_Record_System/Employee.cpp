@@ -120,7 +120,7 @@ void Employee::copyNextWord(char* dest, char* source) {
 
 }
 
-void Employee::createBankAcc(const std::string& EGN, double amount, std::vector<Client*>& clients, bool& isGood) {// 00MYBANK<last 4 digits of EGN><bankAccsAmount>
+void Employee::createBankAcc(const std::string& EGN, double amount, std::vector<Client*>& clients) {// 00MYBANK<last 4 digits of EGN><bankAccsAmount>
 	int size = clients.size();
 	for (int i = 0; i < size; i++) {
 		if (EGN == clients[i]->getEGN()) {
@@ -137,12 +137,12 @@ void Employee::createBankAcc(const std::string& EGN, double amount, std::vector<
 
 			f << BAnum << ","<<amount<<'\n';
 			f.close();
-			std::cout << "[ Bank account added succsessfully! ]";
+			std::cout << "[ Bank account added succsessfully! ]\n";
 			return;
 		}
 	}
 	system("cls");
-	std::cout << "[ Client with this EGN does not exist! ]";
+	std::cout << "[ Client with this EGN does not exist! ]\n";
 }
 
 void Employee::deleteClientAcc(std::string& EGN, std::vector<Client*>& clients, bool& isGood) {
@@ -168,7 +168,7 @@ void Employee::deleteClientAcc(std::string& EGN, std::vector<Client*>& clients, 
 	std::cout << "[ Client with this EGN does not exist! ]";
 }
 
-void Employee::addNewCard(const std::string& EGN,const std::string& BAnum, std::vector<Client*>& clients, bool& isGood) {
+void Employee::addNewCard(const std::string& EGN,const std::string& BAnum, std::vector<Client*>& clients) {
 	int size = clients.size();
 	for (int i = 0; i < size; i++) {
 		if (EGN == clients[i]->getEGN()) {
@@ -188,14 +188,14 @@ void Employee::addNewCard(const std::string& EGN,const std::string& BAnum, std::
 					int pos = clients[i]->getBankAccs()[j]->getCards().size() - 1;
 					f << CardNum << "," << clients[i]->getBankAccs()[j]->getCards()[pos]->getPIN() << '\n';
 					f.close();
-					std::cout << "[ Debit card added succsessfully! ]";
+					std::cout << "[ Debit card added succsessfully! ]\n";
 					return;
 
 
 				}
 			}
 			system("cls");
-			std::cout << "[ Client with this Bank account does not exist! ]";
+			std::cout << "[ Client with this Bank account does not exist! ]\n";
 		}
 	}
 }
