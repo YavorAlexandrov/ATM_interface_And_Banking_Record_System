@@ -27,12 +27,12 @@ std::vector<BankAccount*>& Client::getBankAccs() {
 
 void Client::deposit(int funds, int BAnum) {
 	if (funds < 0) {
-		std::cout << "$ Invalid amount!";
+		std::cout << "$ Invalid amount!\n";
 		return;
 	}
 	bankAccounts[BAnum]->setAmount(bankAccounts[BAnum]->getAmount() + funds);
 
-	std::cout << "$ Deposit successfull!";
+	std::cout << "$ Deposit successfull!\n";
 }
 void Client::withdraw(int amount, int BAnum) {
 	if (amount < 0) {
@@ -44,7 +44,7 @@ void Client::withdraw(int amount, int BAnum) {
 		return;
 	}
 	bankAccounts[BAnum]->setAmount(bankAccounts[BAnum]->getAmount() - amount);
-	std::cout << "$ Withdrawal successfull!";
+	std::cout << "$ Withdrawal successfull!\n";
 }
 void Client::checkBalance(int BAnum) {
 	std::cout << "$ Current balance is: " << bankAccounts[BAnum]->getAmount() << '\n';

@@ -290,7 +290,7 @@ void Database::loadClientCards() {
 		int BAsize = clients[i]->getBankAccs().size();
 
 		for (int j = 0; j < BAsize; j++) {
-			std::string fileName = "BankAccounts/Cards/" + clients[i]->getBankAccs()[j]->getNum() + ".txt";
+			std::string fileName = "BankAccounts/Cards/" + clients[i]->getEGN() + clients[i]->getBankAccs()[j]->getNum() + ".txt";
 			std::ifstream f(fileName);
 			int count = countLines(fileName.c_str());
 

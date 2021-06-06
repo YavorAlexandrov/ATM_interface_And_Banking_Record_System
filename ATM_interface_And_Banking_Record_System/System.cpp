@@ -39,7 +39,7 @@ bool System::loginAsClient(const std::string& cardNum, int PIN, int& clientPos, 
 	for (int i = 0; i < size; i++) {
 		int BAsize = db.clients[i]->getBankAccs().size();
 		for (int j = 0; j < BAsize; j++) {
-			int cardsSize = BAsize = db.clients[i]->getBankAccs()[j]->getCards().size();
+			int cardsSize = db.clients[i]->getBankAccs()[j]->getCards().size();
 			for (int k = 0; k < cardsSize; k++) {
 				if (cardNum == db.clients[i]->getBankAccs()[j]->getCards()[k]->getCardNum()
 					&& PIN == db.clients[i]->getBankAccs()[j]->getCards()[k]->getPIN()) {
@@ -50,6 +50,7 @@ bool System::loginAsClient(const std::string& cardNum, int PIN, int& clientPos, 
 			}
 		}
 	}
+	return false;
 }
 
 void System::help(int sw) {
@@ -90,15 +91,18 @@ void System::help(int sw) {
 void System::start() {
 	loadData();
 	cout << "Welcome to the ATM interface and banking record system app!\n";
-	cout << "To begin write 'help' to see all available commands.\n";
+	cout << "To see all available commands at any time write 'help'.\n";
 	string command;
 	while (true) {
+		cout << "> ";
 		cin >> command;
-		//toLowerCase
+		toLowerCase(command);
 		if (command == "help") {
+			system("cls");
 			help(1);
 		}
 		else if (command == "loginasadmin") {
+			system("cls");
 			cout << "$ Please enter username: \n";
 			string username;
 			cin >> username;
@@ -109,19 +113,24 @@ void System::start() {
 			if (loginAsAdmin(username, pass, pos)) {
 				cout << "Successfull login! Welcome " << db.admins[pos]->getName().getFirstName() << '\n';
 				while (true) {
+					cout << "> ";
 					string adminCommand;
 					cin >> adminCommand;
-					//toLowerCase
+					toLowerCase(adminCommand);
 					if (adminCommand == "help") {
+						system("cls");
 						help(2);
 					}
 					else if (adminCommand == "createemployeeaccount") {
+						system("cls");
 						db.addEmployee(pos);
 					}
 					else if (adminCommand == "deleteemployeeaccount") {
+						system("cls");
 						db.deleteEmployee(pos);
 					}
 					else if (adminCommand == "logout") {
+						system("cls");
 						cout << "Logging out...\n";
 						break;
 					}
@@ -135,6 +144,7 @@ void System::start() {
 			}
 		}
 		else if (command == "loginasemployee") {
+			system("cls");
 			cout << "$ Please enter username: \n";
 			string username;
 			cin >> username;
@@ -143,21 +153,26 @@ void System::start() {
 			cin >> pass;
 			int pos;
 			if (loginAsEmployee(username, pass, pos)) {
-				cout << "Successfull login! Welcome " << db.employees[pos]->getName().getFirstName() << '\n'<<"> ";
+				cout << "Successfull login! Welcome " << db.employees[pos]->getName().getFirstName() << '\n';
 				while (true) {
+					cout << "> ";
 					string employeeCommand;
 					cin >> employeeCommand;
-					//toLowerCase
+					toLowerCase(employeeCommand);
 					if (employeeCommand == "help") {
+						system("cls");
 						help(3);
 					}
 					else if (employeeCommand == "createclientaccount") {
+						system("cls");
 						db.addClient(pos);
 					}
 					else if (employeeCommand == "deleteclientaccount") {
+						system("cls");
 						db.deleteClient(pos);
 					}
 					else if (employeeCommand == "createbankaccount") {
+						system("cls");
 						string EGN;
 						cout << "Enter EGN to create new bank account: \n" << "> ";
 						cin >> EGN;
@@ -167,10 +182,12 @@ void System::start() {
 							db.employees[pos]->createBankAcc(EGN,  amount, db.clients);
 					}
 					else if (employeeCommand == "deletebankaccount") {
+						system("cls");
 						db.employees[pos]->deleteBankAcc(db.clients);
 
 					}
 					else if (employeeCommand == "addnewcard") {
+						system("cls");
 						string EGN;
 						cout << "Enter EGN to create new bank account: \n" << "> ";
 						cin >> EGN;
@@ -180,18 +197,22 @@ void System::start() {
 						db.employees[pos]->addNewCard(EGN, BAnum, db.clients);
 					}
 					else if (employeeCommand == "deletecard") {
+						system("cls");
 						db.employees[pos]->deleteCard(db.clients);
 					}
 					else if (employeeCommand == "clientsreport") {
+						system("cls");
 						db.employees[pos]->printClients(db.clients);
 					}
 					else if (employeeCommand == "personalreport") {
+						system("cls");
 						string EGN;
 						cout << "Enter EGN to show report: \n" << "> ";
 						cin >> EGN;
 						db.employees[pos]->printClient(EGN, db.clients);
 					}
 					else if (employeeCommand == "logout") {
+						system("cls");
 						cout << "Logging out...\n";
 						break;
 					}
@@ -205,6 +226,7 @@ void System::start() {
 			}
 		}
 		else if (command == "loginasclient") {
+			system("cls");
 			cout << "$ Please enter card number: \n";
 			string cardNum;
 			cin >> cardNum;
@@ -213,32 +235,52 @@ void System::start() {
 			cin >> PIN;
 			int clientPos;
 			int BApos;
-			//fix login for clients
+			
 			if (loginAsClient(cardNum, PIN, clientPos, BApos)) {
 				cout << "Successfull login! Welcome " << db.clients[clientPos]->getName().getFirstName() << '\n' << "> ";
 				while (true) {
+					cout << "> ";
 					string clientCommand;
 					cin >> clientCommand;
-					//toLowerCase
+					toLowerCase(clientCommand);
 					if (clientCommand == "help") {
+						system("cls");
 						help(4);
 					}
 					else if (clientCommand == "deposit") {
+						system("cls");
 						int funds;
 						cout << "Please enter the amount to deposit: \n> ";
 						cin >> funds;
 						db.clients[clientPos]->deposit(funds, BApos);
+						int size = db.clients[clientPos]->getBankAccs().size();
+						std::string fileName = "BankAccounts/" + db.clients[clientPos]->getEGN() + ".txt";
+						std::ofstream f(fileName, std::ios::trunc);
+						for (int i = 0; i < size; i++) {
+							f << db.clients[clientPos]->getBankAccs()[i]->getNum() << "," << db.clients[clientPos]->getBankAccs()[i]->getAmount() << "\n";
+						}
+						f.close();
 					}
 					else if (clientCommand == "withdraw") {
+						system("cls");
 						int funds;
 						cout << "Please enter the amount to withdraw: \n> ";
 						cin >> funds;
 						db.clients[clientPos]->withdraw(funds, BApos);
+						int size = db.clients[clientPos]->getBankAccs().size();
+						std::string fileName = "BankAccounts/" + db.clients[clientPos]->getEGN() + ".txt";
+						std::ofstream f(fileName, std::ios::trunc);
+						for (int i = 0; i < size; i++) {
+							f << db.clients[clientPos]->getBankAccs()[i]->getNum() << "," << db.clients[clientPos]->getBankAccs()[i]->getAmount() << "\n";
+						}
+						f.close();
 					}
 					else if (clientCommand == "checkbalance") {
+						system("cls");
 						db.clients[clientPos]->checkBalance(BApos);
 					}
 					else if (clientCommand == "logout") {
+						system("cls");
 						cout << "Logging out...\n";
 						break;
 					}
@@ -252,11 +294,21 @@ void System::start() {
 			}
 		}
 		else if (command == "exit") {
-			cout << "Exitting...";
+			system("cls");
+			cout << "Exitting...\n";
 			break;
 		}
 		else {
 			cout << "Invalid command!\n";
+		}
+	}
+}
+
+void System::toLowerCase(std::string& str) {
+	int size = str.length();
+	for (int i = 0; i < size; i++) {
+		if (str[i] >= 'A' && str[i] <= 'Z') {
+			str[i] = str[i] + ('a' - 'A');
 		}
 	}
 }

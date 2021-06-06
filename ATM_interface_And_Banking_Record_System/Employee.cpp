@@ -183,7 +183,7 @@ void Employee::addNewCard(const std::string& EGN,const std::string& BAnum, std::
 					std::string CardNum = "00" + last4Digitis + num;
 
 					clients[i]->getBankAccs()[j]->addCard(CardNum);
-					std::string fileName = "BankAccounts/Cards/" + clients[i]->getBankAccs()[j]->getNum() + ".txt";
+					std::string fileName = "BankAccounts/Cards/"+ clients[i]->getEGN() + clients[i]->getBankAccs()[j]->getNum() + ".txt";
 					std::ofstream f(fileName, std::ios::app);
 					int pos = clients[i]->getBankAccs()[j]->getCards().size() - 1;
 					f << CardNum << "," << clients[i]->getBankAccs()[j]->getCards()[pos]->getPIN() << '\n';
@@ -198,6 +198,8 @@ void Employee::addNewCard(const std::string& EGN,const std::string& BAnum, std::
 			std::cout << "[ Client with this Bank account does not exist! ]\n";
 		}
 	}
+	system("cls");
+	std::cout << "[ Client with this EGN does not exist! ]\n";
 }
 
 void Employee::deleteBankAcc(std::vector<Client*>& clients) {
@@ -225,15 +227,15 @@ void Employee::deleteBankAcc(std::vector<Client*>& clients) {
 					}
 					f.close();
 					system("cls");
-					std::cout<< "[ Bank account deleted succsessfully! ]";
+					std::cout<< "[ Bank account deleted succsessfully! ]\n";
 					return;
 				}
 			}
 			system("cls");
-			std::cout << "[ Client with this Bank account does not exist! ]";
+			std::cout << "[ Client with this Bank account does not exist! ]\n";
 		}
 		system("cls");
-		std::cout << "[ Client with this EGN does not exist! ]";
+		std::cout << "[ Client with this EGN does not exist! ]\n";
 	}
 
 }
@@ -320,8 +322,10 @@ void Employee::printClient(const std::string& EGN, std::vector<Client*>& clients
 				}
 			}
 
-			
+			return;
 
 		}
 	}
+	system("cls");
+	std::cout << "[ Client with this EGN does not exist! ]\n";
 }
