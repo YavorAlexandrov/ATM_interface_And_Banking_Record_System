@@ -6,7 +6,7 @@
 
 int main()
 { 
-    
+   
     System s;
     s.start();
 

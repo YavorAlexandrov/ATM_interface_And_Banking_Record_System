@@ -67,7 +67,7 @@ void Admin::createEmployeeAcc(std::string& username,  std::string& password,  st
 	fullName = Name (firstName, middleName, lastName);
 	
 	string _date;
-	cout << "$ Input date of birth:" << endl << "> ";
+	cout << "$ Input date of birth (dd mm yyyy): " << endl << "> ";
 	cin.ignore();
 	getline(std::cin, _date);
 	char source[11];

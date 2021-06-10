@@ -42,8 +42,12 @@ void Database::addClient(int employeeID) {
 
 }
 
-void Database::addAdmin(const Admin& a) {
+void Database::addAdmin(Admin& a) {
 	admins.push_back(new Admin(a));
+	std::ofstream f("Admins.txt", std::ios::app);
+	f << a.getUsername() << "," << a.getPassword() << "," << a.getEGN() << "," << a.getName().getFirstName() << ","
+		<< a.getName().getMiddleName() << "," << a.getName().getLastName() << "," << a.getDate().getDay() << " "
+		<< a.getDate().getMonth() << " " << a.getDate().getYear() << "," << a.getPhone() << "," << a.getAddress() << "\n";
 
 }
 

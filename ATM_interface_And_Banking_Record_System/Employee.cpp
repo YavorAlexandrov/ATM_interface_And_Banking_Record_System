@@ -61,7 +61,7 @@ void Employee::createClientAcc(std::string& EGN, Name& fullName, Date& date, std
 	fullName = Name(firstName, middleName, lastName);
 
 	std::string _date;
-	std::cout << "$ Input date of birth:" << std::endl << "> ";
+	std::cout << "$ Input date of birth (dd mm yyyy): " << std::endl << "> ";
 	std::cin.ignore();
 	getline(std::cin, _date);
 	char source[11];

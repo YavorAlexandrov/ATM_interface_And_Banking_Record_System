@@ -24,7 +24,7 @@ public:
 	void loadClientBankAccs();
 	void loadClientCards();
 
-	void addAdmin(const Admin& a);
+	void addAdmin(Admin& a);
 
 	void loadUsersFromFiles();
 	void printEmployees();
